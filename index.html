@@ -58,6 +58,7 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
+      display: block;
     }
 
     .nav-logo span {
@@ -489,8 +490,8 @@
 
 <nav>
   <a class="nav-logo" href="/">
-    <img src="/icon.png" alt="Al-Muezzin" onerror="this.style.display='none'" />
-    <span>Al-Muezzin</span>
+    <img src="/icon.png" alt="Al-Muezzin" />
+    <span id="site-name">Müezzin</span>
   </a>
   <div class="nav-links">
     <div class="lang-toggle">
@@ -744,6 +745,7 @@
 
     document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
     document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('site-name').textContent = lang === 'tr' ? 'Müezzin' : 'Al-Muezzin';
 
     document.title = lang === 'tr'
       ? 'Al-Muezzin – Ezan Vakitleri & İslami Uygulama'
