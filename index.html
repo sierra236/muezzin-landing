@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al-Muezzin – Ezan Vakitleri & İslami Uygulama</title>
+  <meta name="description" content="Namaz vakitleri, Kur'an, kıble, zikir ve daha fazlası. Al-Muezzin ile manevi yolculuğunuzu takip edin." />
+  <meta property="og:title" content="Al-Muezzin – Ezan Vakitleri" />
+  <meta property="og:description" content="Namaz vakitleri, Kur'an, kıble, zikir ve daha fazlası." />
+  <meta property="og:image" content="/og-image.png" />
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark: #0a3d2e;
+      --green-mid: #0f6e56;
+      --green-light: #1d9e75;
+      --green-pale: #e1f5ee;
+      --gold: #c9a84c;
+      --gold-dark: #9c7a2e;
+      --text: #1a1a1a;
+      --text-muted: #555;
+      --bg: #ffffff;
+      --surface: #f8faf9;
+      --radius: 16px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+    }
+
+    .nav-logo span {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--green-dark);
+      letter-spacing: -0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn-download {
+      background: var(--green-dark);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-download:hover { background: var(--green-mid); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(160deg, var(--green-dark) 0%, #0d5c45 50%, #0f7a5a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      top: -200px; right: -200px;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      bottom: -100px; left: -100px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      max-width: 700px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255,255,255,0.75);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 3.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .store-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      color: var(--green-dark);
+      text-decoration: none;
+      padding: 0.85rem 1.5rem;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.2); }
+
+    .store-btn svg { width: 24px; height: 24px; flex-shrink: 0; }
+
+    .store-btn .btn-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .store-btn .btn-sub { font-size: 11px; font-weight: 400; color: var(--text-muted); }
+
+    .hero-phones {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .phone-mock {
+      width: 200px;
+      background: var(--green-dark);
+      border-radius: 32px;
+      border: 6px solid rgba(255,255,255,0.15);
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    .phone-mock:nth-child(2) {
+      transform: translateY(-20px);
+    }
+
+    .phone-mock img {
+      width: 100%;
+      display: block;
+    }
+
+    .phone-mock-placeholder {
+      width: 100%;
+      aspect-ratio: 9/19;
+      background: linear-gradient(180deg, #0f3d2d 0%, #0a2d21 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    .mock-prayer {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .mock-prayer-time {
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .mock-prayer-name {
+      font-size: 14px;
+      color: #fff;
+      font-weight: 600;
+      margin: 4px 0 2px;
+    }
+
+    .mock-prayer-val {
+      font-size: 22px;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .mock-list { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+
+    .mock-list-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 9px;
+      color: rgba(255,255,255,0.7);
+      padding: 6px 8px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 8px;
+    }
+
+    .mock-list-item.active {
+      background: rgba(201,168,76,0.2);
+      color: var(--gold);
+    }
+
+    /* STATS */
+    .stats {
+      background: var(--surface);
+      padding: 3rem 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .stat { text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 700; color: var(--green-dark); line-height: 1; }
+    .stat-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* FEATURES */
+    .features {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--green-light);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 3.5rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .feature-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: var(--green-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* TRACK */
+    .track-section {
+      background: var(--green-dark);
+      padding: 5rem 2rem;
+      color: #fff;
+    }
+
+    .track-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .track-text { flex: 1; min-width: 280px; }
+    .track-text .section-label { color: var(--gold); text-align: left; }
+    .track-text h2 {
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.5px;
+      margin-bottom: 1rem;
+    }
+    .track-text p { color: rgba(255,255,255,0.7); font-size: 15px; margin-bottom: 1.5rem; }
+
+    .badges-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .badge-chip {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      padding: 0.4rem 0.85rem;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .track-visual { flex: 1; min-width: 280px; }
+
+    .streak-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .streak-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .streak-header span { font-size: 14px; color: rgba(255,255,255,0.6); }
+    .streak-count { font-size: 2rem; font-weight: 700; color: var(--gold); }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      margin-bottom: 1rem;
+    }
+
+    .day {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .day.done { background: var(--green-light); }
+    .day.done-full { background: var(--gold); }
+    .day.today { background: rgba(255,255,255,0.2); color: #fff; font-weight: 600; }
+
+    .prayers-today {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+
+    .prayer-dot {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .prayer-dot.done { background: var(--green-light); color: #fff; }
+
+    /* TESTIMONIALS */
+    .testimonials {
+      padding: 5rem 2rem;
+      background: var(--surface);
+    }
+
+    .testimonials-inner { max-width: 900px; margin: 0 auto; }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .review-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .stars { color: #f59e0b; font-size: 14px; margin-bottom: 0.75rem; }
+    .review-text { font-size: 14px; color: var(--text); line-height: 1.65; margin-bottom: 1rem; }
+    .reviewer { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
+    /* DOWNLOAD CTA */
+    .cta-section {
+      padding: 5rem 2rem;
+      text-align: center;
+      background: #fff;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--green-dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 0.75rem;
+    }
+
+    .cta-section p {
+      color: var(--text-muted);
+      font-size: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .store-btn-dark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green-dark);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.85rem 1.5rem;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .store-btn-dark:hover { background: var(--green-mid); transform: translateY(-2px); }
+    .store-btn-dark svg { width: 24px; height: 24px; flex-shrink: 0; }
+    .store-btn-dark .btn-text { display: flex; flex-direction: column; line-height: 1.2; }
+    .store-btn-dark .btn-sub { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.65); }
+
+    /* FOOTER */
+    footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 2rem;
+      font-size: 13px;
+    }
+
+    footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+    footer a:hover { color: #fff; }
+
+    /* SHARE REDIRECT OVERLAY (hidden by default) */
+    #share-redirect {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--green-dark);
+      color: #fff;
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    #share-redirect .redirect-icon { font-size: 3rem; }
+    #share-redirect h2 { font-size: 1.5rem; font-weight: 600; }
+    #share-redirect p { color: rgba(255,255,255,0.7); font-size: 15px; max-width: 400px; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0.85rem 1.25rem; }
+      .nav-links .btn-download { display: none; }
+      .hero { padding-top: 5rem; }
+      .phone-mock:nth-child(2) { display: none; }
+      .stats { gap: 2rem; }
+      .track-inner { gap: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="/icon.png" alt="Al-Muezzin" onerror="this.style.display='none'" />
+    <span>Al-Muezzin</span>
+  </a>
+  <div class="nav-links">
+    <a class="btn-download" href="#download">Ücretsiz İndir</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🕌 Manevi yolculuğunuz için tasarlandı</div>
+  <h1>Günlük ibadetin<br><span>dijital yoldaşı</span></h1>
+  <p>Namaz vakitleri, Kur'an-ı Kerim, kıble yönü, zikir takibi ve çok daha fazlası. Üstelik tamamen ücretsiz.</p>
+
+  <div class="hero-ctas">
+    <a class="store-btn" href="https://apps.apple.com/tr/app/m%C3%BCezzin-ezan-vakitleri/id6768078885" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="btn-text">
+        <span class="btn-sub">App Store'dan İndir</span>
+        <span>iPhone & iPad</span>
+      </div>
+    </a>
+    <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.almuezzin.ezanvakitleri" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.25.99.22l.06-.04L13.5 14 10 10.5l-6.82 12.78v.48zM20.1 10.65l-2.54-1.47-3.92 3.82 3.92 3.82 2.57-1.49c.73-.42.73-1.53-.03-2.68zM1.55.4C1.2.7 1 1.2 1 1.87v20.26c0 .67.2 1.17.56 1.47L2.7 22.5 12.3 13 2.7 3.5 1.55.4zM13.5 10l3.08-3L14.04 5.5c-.6-.35-1.2-.38-1.7-.07l-9.5 5.5 3.16 3.07L13.5 10z"/></svg>
+      <div class="btn-text">
+        <span class="btn-sub">Google Play'den İndir</span>
+        <span>Android</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- Phone mockups -->
+  <div class="hero-phones">
+    <div class="phone-mock">
+      <div class="phone-mock-placeholder">
+        <div class="mock-prayer">
+          <div class="mock-prayer-time">Sonraki Namaz</div>
+          <div class="mock-prayer-name">İkindi</div>
+          <div class="mock-prayer-val">16:24</div>
+        </div>
+        <div class="mock-list">
+          <div class="mock-list-item"><span>İmsak</span><span>04:32</span></div>
+          <div class="mock-list-item"><span>Güneş</span><span>06:15</span></div>
+          <div class="mock-list-item"><span>Öğle</span><span>13:05</span></div>
+          <div class="mock-list-item active"><span>İkindi</span><span>16:24</span></div>
+          <div class="mock-list-item"><span>Akşam</span><span>19:47</span></div>
+          <div class="mock-list-item"><span>Yatsı</span><span>21:18</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="phone-mock">
+      <div class="phone-mock-placeholder">
+        <div class="mock-prayer">
+          <div class="mock-prayer-time">Günlük Ayet</div>
+          <div class="mock-prayer-name" style="font-size:10px; color:rgba(255,255,255,0.8); margin-top:8px; line-height:1.6;">"Ve Allah ile birlikte başka bir ilaha yalvarma. O'ndan başka hiçbir ilah yoktur."</div>
+          <div class="mock-prayer-time" style="margin-top:6px;">— Kasas 88</div>
+        </div>
+        <div class="mock-list">
+          <div class="mock-list-item"><span>Yasin</span><span>83 ayet</span></div>
+          <div class="mock-list-item"><span>El-Mulk</span><span>30 ayet</span></div>
+          <div class="mock-list-item"><span>El-Kehf</span><span>110 ayet</span></div>
+          <div class="mock-list-item active"><span>El-Bakara</span><span>286 ayet</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Günlük namaz vakti</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">114</div>
+    <div class="stat-label">Kur'an suresi</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">99</div>
+    <div class="stat-label">Esmaü'l Hüsna</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">%100</div>
+    <div class="stat-label">Ücretsiz özellikler</div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">Özellikler</div>
+  <h2 class="section-title">İhtiyacınız olan her şey tek uygulamada</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🕐</div>
+      <h3>Namaz Vakitleri</h3>
+      <p>Konumunuza göre otomatik hesaplanan doğru ezan vakitleri. Widget desteği ile ana ekrandan takip edin.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📖</div>
+      <h3>Kur'an-ı Kerim</h3>
+      <p>Tüm 114 sure Türkçe meal ve Arapça orijinal metniyle. Günlük ayet özelliği ile her gün yeni bir ayet.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🧭</div>
+      <h3>Kıble Yönü</h3>
+      <p>GPS tabanlı hassas kıble pusulası. Nerede olursanız olun Kabe'nin yönünü anında bulun.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📿</div>
+      <h3>Dijital Tesbih</h3>
+      <p>Zikir sayacı ile günlük zikrinizi takip edin. Özelleştirilebilir hedefler ve hatırlatmalar.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✨</div>
+      <h3>Esmaü'l Hüsna</h3>
+      <p>Allah'ın 99 ismi Arapça, Türkçe okunuşu ve anlamıyla. Her gün bir ismi keşfedin.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🤲</div>
+      <h3>Topluluk Duaları</h3>
+      <p>Diğer kullanıcıların niyetlerine Amin deyin. Manevi bir toplulukta birlikte dua edin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRACK SECTION -->
+<section class="track-section">
+  <div class="track-inner">
+    <div class="track-text">
+      <div class="section-label">Takip & Motivasyon</div>
+      <h2>Manevi gelişiminizi takip edin</h2>
+      <p>Namaz serilerinizi takip edin, rozetler kazanın ve her gün biraz daha ilerleyin. Tutarlılık alışkanlık yaratır.</p>
+      <div class="badges-row">
+        <div class="badge-chip">🔥 7 Günlük Seri</div>
+        <div class="badge-chip">⭐ Devoted</div>
+        <div class="badge-chip">💯 Century</div>
+        <div class="badge-chip">🌙 Night Owl</div>
+      </div>
+    </div>
+    <div class="track-visual">
+      <div class="streak-card">
+        <div class="streak-header">
+          <span>Bu Haftaki Serin</span>
+          <div class="streak-count">🔥 14</div>
+        </div>
+        <div class="days-grid">
+          <div class="day done-full">P</div>
+          <div class="day done">S</div>
+          <div class="day done-full">Ç</div>
+          <div class="day done">P</div>
+          <div class="day done-full">C</div>
+          <div class="day done">C</div>
+          <div class="day today">P</div>
+        </div>
+        <div class="prayers-today">
+          <div class="prayer-dot done">İMS</div>
+          <div class="prayer-dot done">GNŞ</div>
+          <div class="prayer-dot done">ÖĞL</div>
+          <div class="prayer-dot done">İKN</div>
+          <div class="prayer-dot">AKŞ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-label" style="text-align:center;">Kullanıcı Yorumları</div>
+    <h2 class="section-title">Kullanıcılarımız ne diyor?</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Uzun süredir kullandığım en iyi namaz vakti uygulaması. Tasarımı çok şık ve kullanımı oldukça kolay."</div>
+        <div class="reviewer">Ahmet K. — App Store</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Kur'an ve kıble özelliği harika. Seri takip sistemi sayesinde namazlarımı hiç atlamıyorum artık."</div>
+        <div class="reviewer">Fatma S. — Google Play</div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <div class="review-text">"Widget'ı çok kullanışlı. Ana ekrandan direkt vakitlere bakabiliyorum. Reklamlara para vermeye değer."</div>
+        <div class="reviewer">Mehmet Y. — App Store</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD CTA -->
+<section class="cta-section" id="download">
+  <h2>Hemen başlayın</h2>
+  <p>Ücretsiz indirin, tüm özellikler sizin olsun.</p>
+  <div class="cta-btns">
+    <a class="store-btn-dark" href="https://apps.apple.com/tr/app/m%C3%BCezzin-ezan-vakitleri/id6768078885" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      <div class="btn-text">
+        <span class="btn-sub">App Store'dan İndir</span>
+        <span>iPhone & iPad</span>
+      </div>
+    </a>
+    <a class="store-btn-dark" href="https://play.google.com/store/apps/details?id=com.almuezzin.ezanvakitleri" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.25.99.22l.06-.04L13.5 14 10 10.5l-6.82 12.78v.48zM20.1 10.65l-2.54-1.47-3.92 3.82 3.92 3.82 2.57-1.49c.73-.42.73-1.53-.03-2.68zM1.55.4C1.2.7 1 1.2 1 1.87v20.26c0 .67.2 1.17.56 1.47L2.7 22.5 12.3 13 2.7 3.5 1.55.4zM13.5 10l3.08-3L14.04 5.5c-.6-.35-1.2-.38-1.7-.07l-9.5 5.5 3.16 3.07L13.5 10z"/></svg>
+      <div class="btn-text">
+        <span class="btn-sub">Google Play'den İndir</span>
+        <span>Android</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Al-Muezzin &nbsp;·&nbsp; <a href="/privacy">Gizlilik Politikası</a> &nbsp;·&nbsp; <a href="/terms">Kullanım Koşulları</a></p>
+</footer>
+
+<!-- SHARE REDIRECT OVERLAY -->
+<div id="share-redirect">
+  <div class="redirect-icon">📖</div>
+  <h2>Al-Muezzin'de görüntüle</h2>
+  <p>Bu içeriği uygulamada açmak için aşağıdan indirin.</p>
+  <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; margin-top:0.5rem;">
+    <a class="store-btn-dark" id="redirect-ios" href="https://apps.apple.com/tr/app/m%C3%BCezzin-ezan-vakitleri/id6768078885" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store
+    </a>
+    <a class="store-btn-dark" id="redirect-android" href="https://play.google.com/store/apps/details?id=com.almuezzin.ezanvakitleri" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;"><path d="M3.18 23.76c.3.17.64.25.99.22l.06-.04L13.5 14 10 10.5l-6.82 12.78v.48zM20.1 10.65l-2.54-1.47-3.92 3.82 3.92 3.82 2.57-1.49c.73-.42.73-1.53-.03-2.68zM1.55.4C1.2.7 1 1.2 1 1.87v20.26c0 .67.2 1.17.56 1.47L2.7 22.5 12.3 13 2.7 3.5 1.55.4zM13.5 10l3.08-3L14.04 5.5c-.6-.35-1.2-.38-1.7-.07l-9.5 5.5 3.16 3.07L13.5 10z"/></svg>
+      Google Play
+    </a>
+  </div>
+</div>
+
+<script>
+  const path = window.location.pathname;
+  const shareMatch = path.match(/^\/share\/(verse|surah|hadith)\/(.+)/);
+
+  if (shareMatch) {
+    const type = shareMatch[1];
+    const id = shareMatch[2];
+    const ua = navigator.userAgent;
+    const deepLink = `prayerapp://share/${type}/${id}`;
+
+    if (/android/i.test(ua)) {
+      window.location = `intent://${deepLink.replace('prayerapp://','')}#Intent;scheme=prayerapp;package=com.almuezzin.ezanvakitleri;end`;
+      setTimeout(() => {
+        document.getElementById('share-redirect').style.display = 'flex';
+        document.getElementById('redirect-ios').style.display = 'none';
+      }, 1500);
+    } else if (/iphone|ipad|ipod/i.test(ua)) {
+      window.location = deepLink;
+      setTimeout(() => {
+        document.getElementById('share-redirect').style.display = 'flex';
+        document.getElementById('redirect-android').style.display = 'none';
+      }, 1500);
+    } else {
+      document.getElementById('share-redirect').style.display = 'flex';
+    }
+  }
+</script>
+
+</body>
+</html>
